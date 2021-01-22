@@ -29,7 +29,16 @@ class ViewTestCase(TestCase):
         self.response = self.client.post('/usuarios/', self.usuario_data, format='json')
         assert self.response.status_code == status.HTTP_201_CREATED
     
-
     def test_api_can_list_all_usuarios(self):
       self.response = self.client.get('/usuarios/')
       assert self.response.status_code == status.HTTP_200_OK
+
+    def test_unique_username_validator(self):
+        self.user = User.objects.create(username='foo', email='foo@email.com')
+        self.user.set_password('any_password')
+        self.usuario = Usuario(user=self.user, saldo=200)
+        self.usuario.save()
+        self.response = self.client.post('/usuarios/', self.usuario_data, format='json')
+        assert self.response.status_code == status.HTTP_400_BAD_REQUEST
+
+
