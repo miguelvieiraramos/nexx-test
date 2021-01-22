@@ -13,14 +13,15 @@ Acessar a pasta
 ```
 cd nexx-test/
 ```
-Executar as migrações
-```
-docker-compose run web python manage.py migrate
-```
 
 Executar os containers
 ```
 docker-compose up
+```
+
+Executar as migrações
+```
+docker-compose run web python manage.py migrate
 ```
 
 Execução dos testes
