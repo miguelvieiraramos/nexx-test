@@ -23,3 +23,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
         )
         user.set_password(validated_data['user']['password'])
         return Usuario.objects.create(user=user, saldo=validated_data.get('saldo'))
+
+
+class CreditoSerializer(serializers.Serializer):
+    credito = serializers.FloatField(min_value=1)

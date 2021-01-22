@@ -4,6 +4,7 @@ from usuario.models import Usuario
 
 class UsuarioValidator:
 
+    @staticmethod
     def unique_validator(username):
         usuarios = Usuario.objects.all()
         for usuario in usuarios:
