@@ -8,9 +8,9 @@ class UsuarioSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='user.username',
                                      required=True,
                                      validators=[UsuarioValidator.unique_validator])
-    email = serializers.CharField(source='user.email')
+    email = serializers.EmailField(source='user.email')
     password = serializers.CharField(write_only=True, source='user.password')
-    saldo = serializers.FloatField()
+    saldo = serializers.FloatField(read_only=True)
 
     class Meta:
         model = Usuario
@@ -22,7 +22,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
           email=validated_data['user']['email']
         )
         user.set_password(validated_data['user']['password'])
-        return Usuario.objects.create(user=user, saldo=validated_data.get('saldo'))
+        return Usuario.objects.create(user=user)
 
 
 class CreditoSerializer(serializers.Serializer):
