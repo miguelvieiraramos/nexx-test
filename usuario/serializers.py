@@ -11,10 +11,11 @@ class UsuarioSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(source='user.email')
     password = serializers.CharField(write_only=True, source='user.password')
     saldo = serializers.FloatField(read_only=True)
+    extrato = serializers.HyperlinkedIdentityField(view_name='extrato')
 
     class Meta:
         model = Usuario
-        fields = ['id', 'username', 'email', 'password', 'saldo']
+        fields = ['id', 'username', 'email', 'password', 'saldo', 'extrato']
 
     def create(self, validated_data):
         user = User.objects.create(

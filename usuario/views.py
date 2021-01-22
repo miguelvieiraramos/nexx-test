@@ -27,8 +27,8 @@ class UsuarioDebito(generics.GenericAPIView):
 
     def post(self, request, pk, format=None):
         usuario = self.get_object(pk)
-        serializer_usuario = UsuarioSerializer(usuario)
-        serializer_debito = DebitoSerializer(data=request.data)
+        serializer_usuario = UsuarioSerializer(usuario, context={'request': self.request})
+        serializer_debito = DebitoSerializer(data=request.data, context={'request': self.request})
         debito = None
         if serializer_debito.is_valid():
             debito = serializer_debito.data.get('debito')
@@ -59,8 +59,8 @@ class UsuarioCredito(generics.GenericAPIView):
 
     def post(self, request, pk, format=None):
         usuario = self.get_object(pk)
-        serializer_usuario = UsuarioSerializer(usuario)
-        serializer_credito = CreditoSerializer(data=request.data)
+        serializer_usuario = UsuarioSerializer(usuario, context={'request': self.request})
+        serializer_credito = CreditoSerializer(data=request.data, context={'request': self.request})
         credito = None
         if serializer_credito.is_valid():
             credito = serializer_credito.data.get('credito')

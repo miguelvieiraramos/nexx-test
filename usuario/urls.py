@@ -6,5 +6,5 @@ urlpatterns = [
     path('usuarios/<int:pk>/creditar/', views.UsuarioCredito.as_view()),
     path('usuarios/<int:pk>/debitar/', views.UsuarioDebito.as_view()),
     path('usuarios/<int:pk>/', views.UsuarioDetail.as_view()),
-    path('usuarios/<int:pk>/extrato/', views.UsuarioExtrato.as_view()),
+    path('usuarios/<int:pk>/extrato/', views.UsuarioExtrato.as_view(), name='extrato'),
 ]
