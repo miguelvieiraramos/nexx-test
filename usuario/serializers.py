@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from usuario.models import Usuario
+from usuario.models import Usuario, Transacao
 from django.contrib.auth.models import User
 from usuario.validators import UsuarioValidator
 
@@ -27,3 +27,15 @@ class UsuarioSerializer(serializers.ModelSerializer):
 
 class CreditoSerializer(serializers.Serializer):
     credito = serializers.FloatField(min_value=1)
+
+
+class DebitoSerializer(serializers.Serializer):
+    debito = serializers.FloatField(min_value=1)
+
+
+class ExtratoSerializer(serializers.ModelSerializer):
+    data = serializers.DateTimeField(format='%d/%m/%Y')
+
+    class Meta:
+        model = Transacao
+        fields = ['id', 'saldo_inicial', 'saldo_final', 'mensagem', 'tipo', 'data']
