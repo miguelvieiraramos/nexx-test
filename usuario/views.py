@@ -36,13 +36,12 @@ class UsuarioDebito(generics.GenericAPIView):
             novo_saldo = saldo_atual - debito
             usuario.saldo = novo_saldo
             usuario.save()
-            transacao = Transacao(
+            Transacao.objects.create(
                 tipo='Débito',
                 saldo_inicial=saldo_atual,
                 saldo_final=novo_saldo,
                 mensagem=f'Debitado o valor de R$ {debito}.',
                 usuario=usuario)
-            transacao.save()
         else:
             return Response(serializer_debito.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer_usuario.data)
@@ -68,13 +67,12 @@ class UsuarioCredito(generics.GenericAPIView):
             novo_saldo = saldo_atual + credito
             usuario.saldo = novo_saldo
             usuario.save()
-            transacao = Transacao(
+            Transacao.objects.create(
                 tipo='Crédito',
                 saldo_inicial=saldo_atual,
                 saldo_final=novo_saldo,
                 mensagem=f'Creditado o valor de R$ {credito}.',
                 usuario=usuario)
-            transacao.save()
         else:
             return Response(serializer_credito.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer_usuario.data)
