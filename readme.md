@@ -14,14 +14,24 @@ Acessar a pasta
 cd nexx-test/
 ```
 
+Build imagens
+```
+docker-compose build
+```
+
 Executar os containers
 ```
-docker-compose up
+docker-compose up -d
 ```
 
 Executar as migrações
 ```
 docker-compose run web python manage.py migrate
+```
+
+Acessar a API
+```
+localhost:8000
 ```
 
 Execução dos testes
